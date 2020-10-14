@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        recyclerView=findViewById(R.id.recycler_view);
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
@@ -47,13 +51,16 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"You clicked : ", Toast.LENGTH_SHORT).show();
         });
 */
-        getData();
+        setObserver();
 
     }
 
-    private void getData() {
-        userViewModel.fetchUserInfo().observe(this, userList -> {
-            adapter.setUserList((ArrayList<User>) userList);
-        });
+    private void setObserver() {
+        userViewModel.userList.observe(this,userListObs);
     }
+
+    private Observer<List<User>> userListObs = listActivityLog -> {
+
+    };
+
 }

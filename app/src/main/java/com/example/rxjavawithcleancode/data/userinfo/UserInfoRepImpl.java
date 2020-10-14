@@ -5,6 +5,7 @@ import com.example.rxjavawithcleancode.data.base.RepoImpl;
 import com.example.rxjavawithcleancode.domain.model.User;
 import com.example.rxjavawithcleancode.domain.repository.UserInfoRepo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -12,7 +13,7 @@ import io.reactivex.Observable;
 public class UserInfoRepImpl extends RepoImpl implements UserInfoRepo {
 
 
-    User userInfoApi;
+    List<User> userInfoApi=new ArrayList<>();
     public UserInfoRepImpl(EndPoint endpoint) {
         mEndpoint = endpoint;
     }
@@ -22,17 +23,20 @@ public class UserInfoRepImpl extends RepoImpl implements UserInfoRepo {
         if ( userInfoApi== null ) {
             return getUserInfoFromServer();
         }
-        return Observable.just(userInfoApi);
+    //   return  Observable.create();
+        return null; //null return to avoid error now
     }
 
     private Observable<List<User>> getUserInfoFromServer() {
-       // final EndPoint apiInterface = ApiClient.getInstance().create(EndPoint.class);
 
-        mEndpoint.getUsers().map(userInfoApi -> {
+        /*mEndpoint.getUsers().map(userInfoApi -> {
 
 
         });
         return userInfoApi;
+    }*/
+        return null; //null return to avoid error now
+
     }
 
 }
