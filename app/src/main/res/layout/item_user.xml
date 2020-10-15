@@ -3,7 +3,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.rxjavawithcleancode.vm.UserInfoVm"/>
+            type="com.example.rxjavawithcleancode.vm.RowUserInfoVm"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"

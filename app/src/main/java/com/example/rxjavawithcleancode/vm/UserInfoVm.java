@@ -34,18 +34,10 @@ public class UserInfoVm extends BaseVm {
     public MutableLiveData<Boolean> hasData = new MutableLiveData<>();
     public MutableLiveData<List<User>> userList = new MutableLiveData();
 
-    public MutableLiveData<String> name = new MutableLiveData<>();
-    public MutableLiveData<String> username = new MutableLiveData<>();
-    public MutableLiveData<String> email = new MutableLiveData<>();
-
-
-    public UserInfoVm(UserInfoUc userInfoUseCase,Retrofit retrofit,User user) {
+    public UserInfoVm(UserInfoUc userInfoUseCase,Retrofit retrofit) {
         this.hasData.setValue(false);
         this.mUserInfoUseCase = userInfoUseCase;
         this.mRetrofit = retrofit;
-        user.setName(user.getName());
-        user.setUsername(user.getUsername());
-        user.setEmail(user.getEmail());
 
     }
 

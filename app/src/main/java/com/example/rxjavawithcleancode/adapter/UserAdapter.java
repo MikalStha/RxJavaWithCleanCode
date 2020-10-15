@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rxjavawithcleancode.R;
 import com.example.rxjavawithcleancode.databinding.ItemUserBinding;
 import com.example.rxjavawithcleancode.domain.model.User;
+import com.example.rxjavawithcleancode.vm.RowUserInfoVm;
 
 import java.util.ArrayList;
 
@@ -27,8 +28,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-        User currentUser = users.get(position);
-        holder.itemUserBinding.setUser(currentUser);
+        User currentUser = users.get(holder.getAdapterPosition());
+        holder.itemUserBinding.setVm(new RowUserInfoVm(currentUser));
     }
 
     @Override

@@ -25,20 +25,14 @@ public class UserInfoRepImpl extends RepoImpl implements UserInfoRepo {
             return getUserInfoFromServer();
 
         }
-    //   return  Observable.create();
         return Observable.just(userInfoApi);
 
-        //  return null; //null return to avoid error now
     }
 
     private Observable<List<User>> getUserInfoFromServer() {
 
       //  mEndpoint = ApiClient.getInstance().create(EndPoint.class);
 
-      //  Call<Observable<List<User>>> call;
-       // call = endPoint.getUsers();
-
-// As I understand call.enqueue() dispatches request calling to retrofit internal mechanism (it works async and we get callbacks)
        // mEndpoint.getUsers().
 
         return  mEndpoint.getUsers();
