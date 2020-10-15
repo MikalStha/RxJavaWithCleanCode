@@ -36,31 +36,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        recyclerView=findViewById(R.id.recycler_view);
+       // recyclerView=findViewById(R.id.recycler_view);
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
+        setObserver();
+
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setHasFixedSize(true);
 
         adapter = new UserAdapter();
-        recyclerView.setAdapter(adapter);
+        binding.recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         userViewModel = ViewModelProviders.of(this).get(UserInfoVm.class);
         /*adapter.setOnItemClickListener(user -> {
             Toast.makeText(getApplicationContext(),"You clicked : ", Toast.LENGTH_SHORT).show();
         });
 */
-        setObserver();
 
     }
 
     private void setObserver() {
-        userViewModel.userList.observe(this,userListObs);
+        userViewModel.fetchUserInfo();
+       // userViewModel.userList.observe(this,userListObs);
     }
 
-    private Observer<List<User>> userListObs = listActivityLog -> {
+   /* private Observer<List<User>> userListObs = listActivityLog -> {
+        userViewModel.fetchUserInfo();
 
     };
-
+*/
 }
