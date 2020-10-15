@@ -33,7 +33,7 @@ public class UserInfoRepImpl extends RepoImpl implements UserInfoRepo {
 
     private Observable<List<User>> getUserInfoFromServer() {
 
-        mEndpoint = ApiClient.getInstance().create(EndPoint.class);
+      //  mEndpoint = ApiClient.getInstance().create(EndPoint.class);
 
       //  Call<Observable<List<User>>> call;
        // call = endPoint.getUsers();

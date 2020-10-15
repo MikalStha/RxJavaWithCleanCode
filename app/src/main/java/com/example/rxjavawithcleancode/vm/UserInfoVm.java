@@ -1,11 +1,17 @@
 package com.example.rxjavawithcleancode.vm;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.rxjavawithcleancode.basevm.BaseVm;
 import com.example.rxjavawithcleancode.domain.interactor.UserInfoUc;
 import com.example.rxjavawithcleancode.domain.model.User;
 
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -13,18 +19,34 @@ import java.util.logging.Logger;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.Converter;
+import retrofit2.HttpException;
+import retrofit2.Retrofit;
+
+import static android.content.ContentValues.TAG;
 
 public class UserInfoVm extends BaseVm {
 
     private final UserInfoUc mUserInfoUseCase;
+    public final Retrofit mRetrofit;
 
     public MutableLiveData<Boolean> hasData = new MutableLiveData<>();
     public MutableLiveData<List<User>> userList = new MutableLiveData();
 
+    public MutableLiveData<String> name = new MutableLiveData<>();
+    public MutableLiveData<String> username = new MutableLiveData<>();
+    public MutableLiveData<String> email = new MutableLiveData<>();
 
-    public UserInfoVm(UserInfoUc userInfoUseCase) {
+
+    public UserInfoVm(UserInfoUc userInfoUseCase,Retrofit retrofit,User user) {
         this.hasData.setValue(false);
         this.mUserInfoUseCase = userInfoUseCase;
+        this.mRetrofit = retrofit;
+        user.setName(user.getName());
+        user.setUsername(user.getUsername());
+        user.setEmail(user.getEmail());
+
     }
 
     public void fetchUserInfo() {
@@ -46,7 +68,18 @@ public class UserInfoVm extends BaseVm {
                     loading.setValue(false);
                     hasData.setValue(false);
                     this.userList.setValue(new ArrayList());
+                    User userInfoApi = new User();
 
+                    if (throwable instanceof HttpException) {
+                        ResponseBody body = ((HttpException) throwable).response().errorBody();
+                        Converter<ResponseBody, User> converter = mRetrofit.responseBodyConverter(User.class, new Annotation[0]);
+                        try {
+                            userInfoApi = converter.convert(body);
+                        } catch (IOException | NullPointerException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    this.userList.setValue((List<User>) userInfoApi);
                 }));
     }
 }

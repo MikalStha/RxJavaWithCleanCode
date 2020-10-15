@@ -40,10 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        setObserver();
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setHasFixedSize(true);
+
+        setObserver();
 
         adapter = new UserAdapter();
         binding.recyclerView.setAdapter(adapter);
@@ -58,13 +59,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setObserver() {
-        userViewModel.fetchUserInfo();
-       // userViewModel.userList.observe(this,userListObs);
+
+        userViewModel.userList.observe(this,userListObs);
     }
 
-   /* private Observer<List<User>> userListObs = listActivityLog -> {
+    private Observer<List<User>> userListObs = userInfoApi -> {
         userViewModel.fetchUserInfo();
 
     };
-*/
 }

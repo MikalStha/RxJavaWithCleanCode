@@ -2,8 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="user"
-            type="com.example.rxjavawithcleancode.domain.model.User"/>
+            name="vm"
+            type="com.example.rxjavawithcleancode.vm.UserInfoVm"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{user.name}"
+            android:text="@{vm.name}"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            android:text="@{user.username}"
+            android:text="@{vm.username}"
             android:paddingStart="20dp"
             android:textColor="#FFFFFF" />
 
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            android:text="@{user.email}"
+            android:text="@{vm.email}"
             android:paddingStart="20dp"
             android:textColor="#FFFFFF" />
 
