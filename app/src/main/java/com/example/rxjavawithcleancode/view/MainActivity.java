@@ -22,6 +22,7 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -31,26 +32,30 @@ public class MainActivity extends AppCompatActivity {
 
     private UserInfoVm userViewModel;
     UserAdapter adapter;
-    RecyclerView recyclerView;
+   // RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       // recyclerView=findViewById(R.id.recycler_view);
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
+        binding.title.setText("Hello Sampple App");
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setHasFixedSize(true);
 
+
+        userViewModel=new UserInfoVm();
+        userViewModel.fetchUserInfo();
         setObserver();
 
-        adapter = new UserAdapter();
+
+
+        adapter = new UserAdapter(userViewModel,MainActivity.this);
         binding.recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        userViewModel = ViewModelProviders.of(this).get(UserInfoVm.class);
+      //  userViewModel = ViewModelProviders.of(this).get(UserInfoVm.class);
         /*adapter.setOnItemClickListener(user -> {
             Toast.makeText(getApplicationContext(),"You clicked : ", Toast.LENGTH_SHORT).show();
         });
@@ -64,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Observer<List<User>> userListObs = userInfoApi -> {
-        userViewModel.fetchUserInfo();
 
+        System.out.println("data fetched....");
     };
 }

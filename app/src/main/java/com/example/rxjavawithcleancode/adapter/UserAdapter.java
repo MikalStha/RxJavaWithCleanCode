@@ -1,5 +1,6 @@
 package com.example.rxjavawithcleancode.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +12,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rxjavawithcleancode.R;
 import com.example.rxjavawithcleancode.databinding.ItemUserBinding;
 import com.example.rxjavawithcleancode.domain.model.User;
+import com.example.rxjavawithcleancode.view.MainActivity;
 import com.example.rxjavawithcleancode.vm.RowUserInfoVm;
+import com.example.rxjavawithcleancode.vm.UserInfoVm;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
-    private ArrayList<User> users;
+    private List<User> users;
+    UserInfoVm userInfoVml;
+
+    private UserInfoVm userInfoVm;
+    private Context context;
     private OnItemClickListener listener;
+
+    public UserAdapter(UserInfoVm userInfoVm,Context context) {
+
+        this.userInfoVm = userInfoVm;
+        this.context = context;
+    }
+
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -29,7 +44,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User currentUser = users.get(holder.getAdapterPosition());
-        holder.itemUserBinding.setVm(new RowUserInfoVm(currentUser));
+        holder.itemUserBinding.setVm(new UserInfoVm(currentUser));
     }
 
     @Override

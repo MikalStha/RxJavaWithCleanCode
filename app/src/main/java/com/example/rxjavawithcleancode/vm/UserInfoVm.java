@@ -4,9 +4,13 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.rxjavawithcleancode.api.EndPoint;
 import com.example.rxjavawithcleancode.basevm.BaseVm;
+import com.example.rxjavawithcleancode.data.base.RepoImpl;
+import com.example.rxjavawithcleancode.data.userinfo.UserInfoRepImpl;
 import com.example.rxjavawithcleancode.domain.interactor.UserInfoUc;
 import com.example.rxjavawithcleancode.domain.model.User;
+import com.example.rxjavawithcleancode.domain.repository.UserInfoRepo;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -28,16 +32,28 @@ import static android.content.ContentValues.TAG;
 
 public class UserInfoVm extends BaseVm {
 
-    private final UserInfoUc mUserInfoUseCase;
-    public final Retrofit mRetrofit;
+    UserInfoUc mUserInfoUseCase;
 
     public MutableLiveData<Boolean> hasData = new MutableLiveData<>();
     public MutableLiveData<List<User>> userList = new MutableLiveData();
 
-    public UserInfoVm(UserInfoUc userInfoUseCase,Retrofit retrofit) {
+    public MutableLiveData<String> name = new MutableLiveData<>();
+    public MutableLiveData<String> username = new MutableLiveData<>();
+    public MutableLiveData<String> email = new MutableLiveData<>();
+
+    public UserInfoVm() {
         this.hasData.setValue(false);
-        this.mUserInfoUseCase = userInfoUseCase;
-        this.mRetrofit = retrofit;
+
+        UserInfoRepImpl userInfoRepImpl=new UserInfoRepImpl();
+        UserInfoUc userInfoUseCase = new UserInfoUc(userInfoRepImpl);
+        this.mUserInfoUseCase=userInfoUseCase;
+
+    }
+
+    public UserInfoVm(User user){
+        user.setName(user.getName());
+        user.setUsername(user.getUsername());
+        user.setEmail(user.getEmail());
 
     }
 
@@ -60,7 +76,7 @@ public class UserInfoVm extends BaseVm {
                     loading.setValue(false);
                     hasData.setValue(false);
                     this.userList.setValue(new ArrayList());
-                    User userInfoApi = new User();
+                   /* User userInfoApi = new User();
 
                     if (throwable instanceof HttpException) {
                         ResponseBody body = ((HttpException) throwable).response().errorBody();
@@ -71,7 +87,7 @@ public class UserInfoVm extends BaseVm {
                             e.printStackTrace();
                         }
                     }
-                    this.userList.setValue((List<User>) userInfoApi);
+                    this.userList.setValue((List<User>) userInfoApi);*/
                 }));
     }
 }

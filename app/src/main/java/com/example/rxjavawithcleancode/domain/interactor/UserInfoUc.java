@@ -9,7 +9,7 @@ import io.reactivex.Observable;
 
 public class UserInfoUc {
 
-    private final UserInfoRepo userInfoRepo;
+    UserInfoRepo userInfoRepo;
 
     public UserInfoUc(UserInfoRepo userInfoRepo) {
         this.userInfoRepo = userInfoRepo;

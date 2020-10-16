@@ -14,9 +14,10 @@ import retrofit2.Call;
 public class UserInfoRepImpl extends RepoImpl implements UserInfoRepo {
 
     List<User> userInfoApi;
-    public UserInfoRepImpl(EndPoint endpoint) {
-        mEndpoint = endpoint;
+    public UserInfoRepImpl() {
+
     }
+
 
     @Override
     public Observable<List<User>> getUserInfoApi() {
@@ -31,7 +32,7 @@ public class UserInfoRepImpl extends RepoImpl implements UserInfoRepo {
 
     private Observable<List<User>> getUserInfoFromServer() {
 
-      //  mEndpoint = ApiClient.getInstance().create(EndPoint.class);
+        mEndpoint = ApiClient.getInstance().create(EndPoint.class);
 
        // mEndpoint.getUsers().
 
