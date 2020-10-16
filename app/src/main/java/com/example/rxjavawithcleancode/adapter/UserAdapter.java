@@ -27,12 +27,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private Context context;
     private OnItemClickListener listener;
 
-    public UserAdapter(UserInfoVm userInfoVm,Context context) {
+    /*public UserAdapter(UserInfoVm userInfoVm,Context context) {
 
         this.userInfoVm = userInfoVm;
         this.context = context;
     }
-
+*/
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

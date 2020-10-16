@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        adapter = new UserAdapter(userViewModel,MainActivity.this);
+        adapter = new UserAdapter();
         binding.recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
