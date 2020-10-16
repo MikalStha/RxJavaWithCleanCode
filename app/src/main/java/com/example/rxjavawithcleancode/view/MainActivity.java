@@ -32,28 +32,25 @@ public class MainActivity extends AppCompatActivity {
 
     private UserInfoVm userViewModel;
     UserAdapter adapter;
+    ActivityMainBinding binding;
    // RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.title.setText("Hello Sampple App");
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+         binding.title.setText("Hello Sampple App");
+
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setHasFixedSize(true);
-
 
         userViewModel=new UserInfoVm();
         userViewModel.fetchUserInfo();
         setObserver();
 
 
-
-        adapter = new UserAdapter();
-        binding.recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
       //  userViewModel = ViewModelProviders.of(this).get(UserInfoVm.class);
         /*adapter.setOnItemClickListener(user -> {
@@ -70,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
 
     private Observer<List<User>> userListObs = userInfoApi -> {
 
+        ActivityMainBinding binding;
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        adapter = new UserAdapter();
+        binding.recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
         System.out.println("data fetched....");
+
     };
 }
