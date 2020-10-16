@@ -67,10 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Observer<List<User>> userListObs = userInfoApi -> {
 
-        ActivityMainBinding binding;
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        adapter = new UserAdapter();
+        adapter = new UserAdapter(userInfoApi);
         binding.recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 

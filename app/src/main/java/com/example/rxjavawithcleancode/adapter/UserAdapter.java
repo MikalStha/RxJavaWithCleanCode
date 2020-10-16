@@ -21,18 +21,14 @@ import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     private List<User> users;
-    UserInfoVm userInfoVml;
 
     private UserInfoVm userInfoVm;
-    private Context context;
     private OnItemClickListener listener;
 
-    /*public UserAdapter(UserInfoVm userInfoVm,Context context) {
+    public UserAdapter(List<User> users) {
 
-        this.userInfoVm = userInfoVm;
-        this.context = context;
+        this.users = users;
     }
-*/
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -51,9 +51,9 @@ public class UserInfoVm extends BaseVm {
     }
 
     public UserInfoVm(User user){
-        user.setName(user.getName());
-        user.setUsername(user.getUsername());
-        user.setEmail(user.getEmail());
+        name.setValue(user.getName());
+        username.setValue(user.getUsername());
+        email.setValue(user.getEmail());
 
     }
 
